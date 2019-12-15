@@ -1,0 +1,115 @@
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><META name="author" content="MUV Bolivia">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/css?family=Neucha);
+</style>
+<script>
+    $(document).ready(function() {
+        var playing = !1;
+        $("#animacion").hide()
+        var mute = !1;
+        var host = "http://centova1.consultoradas.com";
+        update();
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            $("#vol-control").hide();
+            $("#vol").hide();
+            $("#yalp").attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454483077.png");
+            $("#animacion").hide();
+            $("#estacion").attr("style", "font-size:8px !important");
+            $("#10203040302010").attr("style", "font-size:12px !important");
+            $("#mnbvcxzqaz").attr("style", "font-size:12px !important")
+        } else {
+            playing = !1;
+            $("#yalp").attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454483077.png")
+        }
+        var port = "3642";
+        console.log(host + port);
+        console.log(playing);
+        $("#player").attr("src", host + ":" + "3642" + "/live");
+        setInterval(function() {
+            if (playing) {
+                update()
+            }
+        }, 60000);
+        $("#yalp").hover(function() {
+            if (playing) {
+                $(this).attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454684397.png")
+            } else {
+                $(this).attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454343308.png")
+            }
+        });
+        $("#yalp").mouseleave(function() {
+            if (playing) {
+                $(this).attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454729467.png")
+            } else {
+                $(this).attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454483077.png")
+            }
+        });
+        $("#yalp").click(function() {
+            if (playing) {
+                $("#player")[0].pause();
+                playing = !1;
+                $("#yalp").attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454483077.png");
+                $("#animacion").hide()
+            } else {
+                $("#player")[0].play();
+                playing = !0;
+                $("#yalp").attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454729467.png");
+                $("#animacion").show()
+            }
+        });
+        $("#vol").click(function() {
+            if (mute) {
+                mute = !1;
+                SetVolume(100);
+                $("#vol-control").val("100");
+                $("#vol").attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454868824.png")
+            } else {
+                mute = !0;
+                SetVolume(0);
+                $("#vol-control").val("0");
+                $("#vol").attr("src", "https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454875758.png")
+            }
+        });
+    
+        function update() {
+            var d = new Date();
+            //console.log("DIA: " + d.getDay());
+            $("#10203040302010").html("Conoce nuestra programación");
+        }
+        window.SetVolume = function(val) {
+            var player = document.getElementById('player');
+            player.volume = val / 100
+        }
+    });
+</script>
+<body>
+<div class="col-md-12 col-sm-12 col-xs-12" style="position:fixed; bottom:0; background: #45a247;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #45a247, #283c86);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #45a247, #283c86); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 80px; z-index:100; border-radius: 15px;">
+    <audio autoplay="false" id="player"></audio>
+
+    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
+        <img id="yalp" src="https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454483077.png" style="height:80px;" />
+    </div>
+
+    <div class="col-lg-1 col-md-1 col-sm-2 col-xs-3">
+        <img id="poiuytrewq" src="https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121515392325097.png" style="height:80px;" />
+    </div>
+
+    <div class="col-lg-8 col-md-8 col-sm-7  col-xs-4" style="color: #fff; height:80px;">
+        <p id="estacion" style="font-size:14px; margin:0 !important; font-family: Neucha;">Panamericana</p>
+        <span id="10203040302010" style="font-size:26px; font-family: Neucha; padding-top:10px !important;">Programaci&oacute;n</span><br>
+        <img id="vol" src="https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516454868824.png" style="width:16px; float:left;" />
+        <input id="vol-control" max="100" min="0" onchange="SetVolume(this.value)" oninput="SetVolume(this.value)" step="1" style="width: 200px; float: left; margin-top:5px;" type="range" value="100" />
+    </div>
+
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-2">
+        <img alt="" id="animacion" src="https://radiopanamerica.opennemas.com/media/radiopanamerica/images/2019/12/15//2019121516520297350.gif" style="width:100%;" />
+    </div>
+</div>
+</body>
